@@ -23,6 +23,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 let ball;
+let isMoving = true;
 
 function preload() {
     this.load.image('ball', 'goldenBall50px.png');
@@ -38,6 +39,17 @@ function create() {
     ball.setCollideWorldBounds(true);
     ball.setOrigin(0.5, 0.5);
 
+    // Get buttons from the HTML and add event listeners
+    document.getElementById("startButton").addEventListener("click", () => {
+        isMoving = true;
+        ball.setVelocity(200, 150);
+    });
+
+    document.getElementById("stopButton").addEventListener("click", () => {
+        isMoving = false;
+        ball.setVelocity(0, 0);
+    });
+
 }
 
 function update() {
@@ -45,5 +57,8 @@ function update() {
 }
 </script>
 
-<body></body>
+<body>
+    <button id="startButton" style="position: absolute; top: 10px; left: 10px;">Start</button>
+    <button id="stopButton" style="position: absolute; top: 10px; left: 70px;">Stop</button>
+</body>
 </html>
