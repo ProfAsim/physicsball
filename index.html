@@ -32,10 +32,10 @@ function preload() {
 function create() {
     ball = this.physics.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'ball');
     ball.setDisplaySize(50, 50); // Keeps it visible
-    ball.setCircle(25); // Adjusts the physics hitbox
+    ball.setCircle(20); // Adjusts the physics hitbox
     ball.setBounce(1);  // Ball will bounce off the walls
     ball.setVelocity(200, 150); // Initial velocity
-    ball.setCollideWorldBounds(true, 2, 2); // Ensures ball bounces off and stays inside with padding
+    ball.setCollideWorldBounds(true); // Ensures ball bounces off 
     ball.setOrigin(0.5, 0.5); // Set the origin to the center
 
     // Get buttons from the HTML and add event listeners
