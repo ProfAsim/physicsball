@@ -26,6 +26,8 @@ let ball;
 
 function preload() {
     this.load.image('ball', 'goldenBall50px.png');
+    ball.setDisplaySize(50, 50); // Keeps it visible
+    ball.setCircle(25); // Adjusts the physics hitbox
 }
 
 function create() {
