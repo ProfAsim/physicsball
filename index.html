@@ -32,7 +32,7 @@ function preload() {
 function create() {
     ball = this.physics.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'ball');
     ball.setDisplaySize(50, 50); // Keeps it visible
-    ball.setCircle(25); // Adjust the physics hitbox to match the display size
+    ball.setCircle(25); // Adjusts the physics hitbox to match the display size (radius 25)
     ball.setBounce(1);  // Ball will bounce off the walls
     ball.setVelocity(200, 150); // Initial velocity
     ball.setCollideWorldBounds(true); // Ensures ball bounces off and stays inside
@@ -51,6 +51,27 @@ function create() {
 }
 
 function update() {
+    // Ensure the ball stays within bounds, considering its size
+    const ballRadius = 25; // The radius is 25 (half of 50px)
+    
+    // Check if the ball is near the edge, and correct its position
+    if (ball.x - ballRadius < 0) {
+        ball.x = ballRadius;
+        ball.setVelocityX(Math.abs(ball.body.velocity.x)); // Reverse velocity if ball goes off the left side
+    }
+    if (ball.x + ballRadius > config.width) {
+        ball.x = config.width - ballRadius;
+        ball.setVelocityX(-Math.abs(ball.body.velocity.x)); // Reverse velocity if ball goes off the right side
+    }
+    if (ball.y - ballRadius < 0) {
+        ball.y = ballRadius;
+        ball.setVelocityY(Math.abs(ball.body.velocity.y)); // Reverse velocity if ball goes off the top
+    }
+    if (ball.y + ballRadius > config.height) {
+        ball.y = config.height - ballRadius;
+        ball.setVelocityY(-Math.abs(ball.body.velocity.y)); // Reverse velocity if ball goes off the bottom
+    }
+
     // The physics engine handles bouncing automatically
     if (!isMoving) {
         ball.setVelocity(0, 0); // Stop the ball if not moving
